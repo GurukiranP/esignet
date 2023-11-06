@@ -84,7 +84,8 @@ const configurationKeys = {
   consentScreenExpireInSec: "consent.screen.timeout-in-secs",
   consentScreenTimeOutBufferInSec: "consent.screen.timeout-buffer-in-secs",
   walletQrCodeAutoRefreshLimit: "wallet.qr-code.auto-refresh-limit",
-  walletConfig: "wallet.config"
+  walletConfig: "wallet.config",
+  signupConfig: "signup.config"
 };
 
 export {

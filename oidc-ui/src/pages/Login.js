@@ -191,6 +191,7 @@ export default function LoginPage({ i18nKeyPrefix = "header" }) {
         clientName={clientName}
         backgroundImgPath="images/illustration_one.png"
         component={compToShow}
+        oidcService={oidcService}
       />
     </>
   );

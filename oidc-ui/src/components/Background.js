@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { configurationKeys } from "../constants/clientConstants";
+import { useLocation } from "react-router-dom";
 
 export default function Background({
   heading,
@@ -9,12 +11,29 @@ export default function Background({
   backgroundImgPath,
   component,
   i18nKeyPrefix = "header",
+  oidcService
 }) {
   const { t } = useTranslation("translation", { keyPrefix: i18nKeyPrefix });
   const headerHeight = document.getElementById("navbar-header")?.offsetHeight;
   const sectionStyle = {
     height: "calc(100% - " + headerHeight + "px)",
   };
+
+  const location = useLocation();
+  const [signupBanner, setSignupBanner] = useState(false);
+  
+  let signupConfig = oidcService.getEsignetConfiguration(
+    configurationKeys.signupConfig
+  );
+  
+  let signupURL;
+
+  useEffect(() => {
+    if(signupConfig !== null && signupConfig !== undefined && signupConfig?.["signup.banner"]) {
+      setSignupBanner(true);
+      signupURL = signupConfig["signup.url"] + location.search + location.hash
+    }
+  }, []);
 
   return (
     <>
@@ -54,6 +73,11 @@ export default function Background({
               ></div>
               {component}
             </div>
+            {signupBanner && 
+            <div className="text-center bg-[#FFF9F0] py-3 relative top-4 mt-2">
+              <p className="text-sm">{t("noAccount")}</p>
+              <a className="text-[#2F8EA3] hover:text-sky-600 focus:text-sky-600 font-semibold" href={signupURL} target="_self">{t("signup_with_one_login")}</a>
+            </div>}
           </div>
         </div>
       </section>
