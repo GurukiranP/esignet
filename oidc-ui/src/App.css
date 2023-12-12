@@ -1,6 +1,7 @@
 .section-background {
   position: relative;
   background-color: var(--login-background);
+  min-height: calc(100vh - 104.6px) !important;
 }
 
 .language-icon-color {
@@ -281,4 +282,13 @@
     max-width: none;
   }
 
+  .section-background .container{
+      min-height: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .section-background .container{
+    min-height: calc(100vh - 104.6px) !important;
+  }
 }
